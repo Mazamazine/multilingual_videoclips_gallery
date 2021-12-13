@@ -1,0 +1,63 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Multilingual Video Clips Gallery\n"
+"POT-Creation-Date: 2021-12-04 01:55-0500\n"
+"PO-Revision-Date: 2021-12-04 01:55-0500\n"
+"Last-Translator: \n"
+"Language-Team: Maze-Photo\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: includes\n"
+"X-Poedit-SearchPath-1: .\n"
+"X-Poedit-SearchPath-2: includes/gallery.php\n"
+"X-Poedit-SearchPath-3: includes/vcg-functions.php\n"
+
+#: includes/gallery.php:4
+msgid "No media found"
+msgstr ""
+
+#: includes/gallery.php:11
+msgid "Audiovisual clips"
+msgstr ""
+
+#: includes/gallery.php:13
+msgid "Choose language"
+msgstr ""
+
+#: includes/vcg-functions.php:19
+msgid "Video clips gallery"
+msgstr ""
+
+#: includes/vcg-functions.php:134
+msgid "Display video clips gallery"
+msgstr ""
+
+#: includes/vcg-functions.php:135
+msgid "no"
+msgstr ""
+
+#: includes/vcg-functions.php:136
+msgid "yes"
+msgstr ""
+
+#: includes/vcg-functions.php:140
+msgid "Attach media"
+msgstr ""
+
+#: includes/vcg-functions.php:144
+msgid "No attachment yet"
+msgstr ""
+
+#: includes/vcg-functions.php:148
+msgid "Included medias"
+msgstr ""
+
+#: includes/vcg-functions.php:162
+msgid "Title"
+msgstr ""

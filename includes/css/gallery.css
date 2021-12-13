@@ -1,0 +1,19 @@
+/* Video gallery styles */
+
+.vcg_video_container {
+  float: left;
+  width: 50%;
+  margin-bottom: 1em;
+}
+.vcg_title {
+  text-transform: uppercase;
+}
+.vcg_main select {
+  margin-bottom: 1em;
+}
+.vcg_video_container video {
+  max-width: 100%;
+}
+.vcg_video_title {
+  margin-top: -10px;
+}
