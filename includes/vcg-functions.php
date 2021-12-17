@@ -191,6 +191,76 @@ function vcg_save_postdata( $post_id ) {
 add_action( 'save_post', 'vcg_save_postdata' );
 
 /*
+ * Get available languages
+ */
+function vcg_get_languages() {
+    //$parentCatID = get_cat_ID('vcg_languages');
+    global $vcg_language_catId;
+    $taxonomies = array('category');
+    $args = array('parent' => $vcg_language_catId);
+    $terms = get_terms($taxonomies, $args);
+
+    $languages = array();
+    foreach($terms as $term) {
+      $languages[] = ['id'=> $term->term_id, 'name'=>$term->name];
+    }
+    return $languages;
+}
+
+/*
+ * Get post videos
+ */
+ function vcg_get_videos( $language = 'français' ) {
+
+    $attachedVidsSerialized = get_post_meta( get_the_ID(), '_vcg_attachments', true );
+
+    if(empty($attachedVidsSerialized)) return false;
+
+    $attachedVids = unserialize($attachedVidsSerialized);
+    $displayedVids = array();
+    foreach($attachedVids as $vidId) {
+        $cats = wp_get_post_categories($vidId);
+        foreach($cats as $catID) {
+          $vidLanguage = get_the_category_by_ID($catID);
+          if($vidLanguage == $language) $displayedVids[] = $vidId;
+        }
+    }
+    return $displayedVids;
+}
+
+/*
+ * Build gallery
+ */
+function vcg_build_gallery() {
+    $attachedVids = vcg_get_videos();
+    if(empty($attachedVids)) { return __('No media found', 'vcg'); }
+
+    $gallery = '<div class="vcg_main">';
+    $gallery .= '<h3 class="vcg_title">' . __('Audiovisual clips', 'vcg') . '</h3>';
+    $gallery .= '<select name="vcg_language">';
+    $gallery .= '<option>' . __('Choose language', 'vcg') . '</option>';
+    // Populate languages
+    $languages = vcg_get_languages();
+    foreach($languages as $language) {
+        $gallery .='<option value="'.$language['id'].'">'.$language['name'].'</option>';
+    }
+    $gallery .= '</select><br/>';
+    // Populate videos
+    foreach($attachedVids as $vidId) {
+        $caption = wp_get_attachment_caption($vidId);
+        $vidUrl = wp_get_attachment_url($vidId);
+        $title = get_the_title($vidId);
+        $gallery .= '<div class="vcg_video_container"';
+        $gallery .= '<figure class="wp-block-video"><video controls="" src="'.$vidUrl.'"></video></figure>';
+        $gallery .= '<div class="vcg_video_title">' . $title . " ($caption)</div>";
+        $gallery .= '</div>';
+    }
+    $gallery .= '</div>';
+
+    return $gallery;
+}
+
+/*
  * Display gallery
  */
 add_filter('the_content', 'show_gallery');
@@ -198,18 +268,8 @@ function show_gallery($content) {
     // Check if gallery is enabled
     $enabled = get_post_meta( get_the_ID(), '_vcg_enable', true );
     if(!$enabled) return $content;
-
-    // start output buffering
-    ob_start(); 
-    // create an output with gallery content
-    include(plugin_dir_path(__FILE__) . 'gallery.php');
-    // read out buffered content
-    $output = ob_get_contents();
-    // finish output buffering
-    ob_end_clean(); 
-
-    $after_content = $output;
-    $fullcontent = $content . $after_content;
+    // Append gallery
+    $gallery = vcg_build_gallery();
+    $fullcontent = $content . $gallery;
     return $fullcontent;
-
 }
