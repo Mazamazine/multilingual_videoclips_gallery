@@ -1,11 +1,14 @@
 <?php
 /**
- * Enqueue stylesheets
+ * Enqueue stylesheets / JS
  */
-add_action( 'wp_enqueue_scripts', 'vcg_stylesheet' );
-function vcg_stylesheet() {
+add_action( 'wp_enqueue_scripts', 'vcg_enqueue_scripts' );
+function vcg_enqueue_scripts() {
     wp_register_style( 'custom-gallery', plugins_url( '/css/gallery.css' , __FILE__ ) );
     wp_enqueue_style( 'custom-gallery' );
+    wp_register_script( 'ajaxHandle', plugins_url( '/js/update_gallery.js' , __FILE__ ), array('jquery'), false, true );
+    wp_enqueue_script( 'ajaxHandle' );
+    wp_localize_script( 'ajaxHandle', 'ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 }
 // pour inclure dans admin
 // add_action( 'enqueue_block_editor_assets', 'legit_block_editor_styles', 999 );
@@ -210,10 +213,10 @@ function vcg_get_languages() {
 /*
  * Get post videos
  */
- function vcg_get_videos( $language = 'français' ) {
+ function vcg_get_videos( $language = 'français', $postID='' ) {
 
-    $attachedVidsSerialized = get_post_meta( get_the_ID(), '_vcg_attachments', true );
-
+    if(empty($postID)) $postID = get_the_ID();
+    $attachedVidsSerialized = get_post_meta( $postID, '_vcg_attachments', true );
     if(empty($attachedVidsSerialized)) return false;
 
     $attachedVids = unserialize($attachedVidsSerialized);
@@ -232,19 +235,23 @@ function vcg_get_languages() {
  * Build gallery
  */
 function vcg_build_gallery() {
+
     $attachedVids = vcg_get_videos();
     if(empty($attachedVids)) { return __('No media found', 'vcg'); }
 
     $gallery = '<div class="vcg_main">';
     $gallery .= '<h3 class="vcg_title">' . __('Audiovisual clips', 'vcg') . '</h3>';
-    $gallery .= '<select name="vcg_language">';
-    $gallery .= '<option>' . __('Choose language', 'vcg') . '</option>';
+    $gallery .= '<select name="vcg_language" id="vcg_language">';
+    $gallery .= '<option value="0">' . __('Choose language', 'vcg') . '</option>';
     // Populate languages
     $languages = vcg_get_languages();
     foreach($languages as $language) {
         $gallery .='<option value="'.$language['id'].'">'.$language['name'].'</option>';
     }
-    $gallery .= '</select><br/>';
+    $gallery .= '</select>';
+    $gallery .= '<input type="hidden" id="postID" value="'.get_the_ID().'" /><br/>';
+
+    $gallery .= '<div class="vcg_video_main">';
     // Populate videos
     foreach($attachedVids as $vidId) {
         $caption = wp_get_attachment_caption($vidId);
@@ -257,7 +264,37 @@ function vcg_build_gallery() {
     }
     $gallery .= '</div>';
 
+    $gallery .= '</div>';
+
     return $gallery;
+}
+
+/**
+ * Update gallery using AJAX
+ */
+add_action( 'wp_ajax_myaction', 'vcg_update_gallery' );
+add_action( 'wp_ajax_nopriv_myaction', 'vcg_update_gallery' );
+function vcg_update_gallery(){
+  // Use data posted through ajax (see js/update_gallery.js)
+  // To send back a response we need to echo the result
+  $language = get_the_category_by_ID($_POST['languageID']);
+  $vidsIDs = vcg_get_videos( "$language", $_POST['postID'] );
+  if(empty($vidsIDs)) {
+     _e('No media found', 'vcg');
+     wp_die();
+  }
+  $divContent = '';
+  foreach($vidsIDs as $vidId) {
+    $caption = wp_get_attachment_caption($vidId);
+    $vidUrl = wp_get_attachment_url($vidId);
+    $title = get_the_title($vidId);
+    $divContent .= '<div class="vcg_video_container"';
+    $divContent .= '<figure class="wp-block-video"><video controls="" src="'.$vidUrl.'"></video></figure>';
+    $divContent .= '<div class="vcg_video_title">' . $title . " ($caption)</div>";
+    $divContent .= '</div>';
+  }
+  echo $divContent;
+  wp_die(); // ajax call must die to avoid trailing 0 in response
 }
 
 /*
