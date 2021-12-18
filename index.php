@@ -12,6 +12,14 @@ Text Domain: vcg
 $vcg_language_catId = false;
 
 function vcg_plugin_init() {
+  // Check if Media Library Categories plugin is active
+  include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+  if ( !is_plugin_active( 'wp-media-library-categories/index.php' ) ) {
+    add_action( 'admin_notices', 'vcg_admin_notice_error' ) ;
+    $plugin = dirname(__FILE__) . '/index.php';
+    deactivate_plugins($plugin);
+    return;
+  }
   // Load translations
   load_plugin_textdomain( 'vcg', false, 'capsules_videos/languages' );
   // We need the 'vcg_languages' categorie for medias languages
@@ -32,5 +40,11 @@ function vcg_plugin_init() {
   );
 }
 add_action('init', 'vcg_plugin_init');
+
+function vcg_admin_notice_error() {
+    $class = 'notice notice-error';
+    $message = __( 'This plugin needs Media Library Categories to work properly. Please install and activate it first! The plugin has been deactivated.', 'vcg' );
+    printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
+}
 
 require_once plugin_dir_path(__FILE__) . 'includes/vcg-functions.php';
