@@ -1,8 +1,12 @@
 <?php
 /*
-Plugin Name: Multilingual Video Clips gallery
-Description: Adds ability to include a video gallery in a post and choose language
+Plugin Name: Multilingual Video Clips Gallery
+Description: Adds ability to include a video gallery in a post and choose a language to filter videos. This plugins needs Media Library Categories to work properly. Tested under Wordpress 5.8.2 with Media Library Categories 1.9.9.
 Author: Nina Ripoll
+Author URI: https://maze-photo.com
+Version: 1.0
+License: GPLv2
+Text Domain: vcg
 */
 
 $vcg_language_catId = false;
