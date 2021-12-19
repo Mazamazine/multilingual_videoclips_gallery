@@ -90,6 +90,7 @@ function vcg_custom_box_html( $post ) {
                     if($('#includedVids:visible').length == 0) {
                       $('#includedVids').show();
                       $('#noAttachTxt').hide();
+                      $('#attachTxt').show();
                     }
 
                     // Add attachment infos to table
@@ -123,10 +124,11 @@ function vcg_custom_box_html( $post ) {
         $(this).parents('tr').remove();
         // Update form with attachment IDs
         $('#vidIds').val(existingAttachments);
-        // Hide table if empty
+        // Hide table if empty and change includes infos
         if(existingAttachments.length == 0) {
           $('#includedVids').hide();
           $('#noAttachTxt').show();
+          $('#attachTxt').hide();
         }
     });
 
@@ -146,11 +148,13 @@ function vcg_custom_box_html( $post ) {
     <span id="messages" style="display: none; color: red"></span>
     <?php
     if(empty($attachedVids)) {
-        echo '<br/><br/><span id="noAttachTxt">'.__('No attachment yet', 'vcg').'</span><br/>';
+        $noAttachedDisplay = 'inline';
+        $attachedDisplay = 'none';
         $tableDisplay = 'none';
         $tableContent = '';
     } else { 
-        echo '<br/><br/>'.__('Included medias', 'vcg').':<br/>';
+        $noAttachedDisplay = 'none';
+        $attachedDisplay = 'inline';
         $tableDisplay = 'block';
         $tableContent = '';
         foreach($attachedVids as $mediaId) {
@@ -162,6 +166,10 @@ function vcg_custom_box_html( $post ) {
             $tableContent .= '</tr>';
         }
     }
+    echo '<br/><br/>';
+    echo '<span id="noAttachTxt" style="display: '.$noAttachedDisplay.'">'.__('No attachment yet', 'vcg').'</span>';
+    echo '<span id="attachTxt" style="display: '.$attachedDisplay.'">'.__('Included medias', 'vcg').':</span>';
+    echo '<br/>';
     ?>
     <table id="includedVids" style="display: <?php echo $tableDisplay; ?>; text-align: left;">
       <th>ID</th><th><?php _e('Title', 'vcg'); ?></th><th>Url</th><th>Action</th>
