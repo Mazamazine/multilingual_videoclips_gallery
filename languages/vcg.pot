@@ -1,7 +1,8 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Multilingual Video Clips Gallery\n"
-"POT-Creation-Date: 2021-12-04 01:55-0500\n"
+"POT-Creation-Date: 2021-12-19 01:33-0500\n"
 "PO-Revision-Date: 2021-12-04 01:55-0500\n"
 "Last-Translator: \n"
 "Language-Team: Maze-Photo\n"
@@ -15,49 +16,60 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SearchPath-0: includes\n"
 "X-Poedit-SearchPath-1: .\n"
-"X-Poedit-SearchPath-2: includes/gallery.php\n"
-"X-Poedit-SearchPath-3: includes/vcg-functions.php\n"
+"X-Poedit-SearchPath-2: includes/vcg-functions.php\n"
 
-#: includes/gallery.php:4
-msgid "No media found"
-msgstr ""
-
-#: includes/gallery.php:11
-msgid "Audiovisual clips"
-msgstr ""
-
-#: includes/gallery.php:13
-msgid "Choose language"
-msgstr ""
-
-#: includes/vcg-functions.php:19
+#: includes/vcg-functions.php:24
 msgid "Video clips gallery"
 msgstr ""
 
-#: includes/vcg-functions.php:134
+#: includes/vcg-functions.php:139
 msgid "Display video clips gallery"
 msgstr ""
 
-#: includes/vcg-functions.php:135
+#: includes/vcg-functions.php:140
 msgid "no"
 msgstr ""
 
-#: includes/vcg-functions.php:136
+#: includes/vcg-functions.php:141
 msgid "yes"
 msgstr ""
 
-#: includes/vcg-functions.php:140
+#: includes/vcg-functions.php:145
 msgid "Attach media"
 msgstr ""
 
-#: includes/vcg-functions.php:144
+#: includes/vcg-functions.php:149
 msgid "No attachment yet"
 msgstr ""
 
-#: includes/vcg-functions.php:148
+#: includes/vcg-functions.php:153
 msgid "Included medias"
 msgstr ""
 
-#: includes/vcg-functions.php:162
+#: includes/vcg-functions.php:167
 msgid "Title"
+msgstr ""
+
+#: includes/vcg-functions.php:172
+msgid "Included medias must have at least one category under the vcg parent category to be displayed"
+msgstr ""
+
+#: includes/vcg-functions.php:173
+msgid "Default category on page load: français"
+msgstr ""
+
+#: includes/vcg-functions.php:243 includes/vcg-functions.php:286
+msgid "No media found"
+msgstr ""
+
+#: includes/vcg-functions.php:246
+msgid "Audiovisual clips"
+msgstr ""
+
+#: includes/vcg-functions.php:248
+msgid "Choose language"
+msgstr ""
+
+#: index.php:46
+msgid "This plugin needs Media Library Categories to work properly. Please install and activate it first! The plugin has been deactivated."
 msgstr ""

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Multilingual Video Clips Gallery\n"
-"POT-Creation-Date: 2021-12-04 01:56-0500\n"
-"PO-Revision-Date: 2021-12-04 01:56-0500\n"
+"POT-Creation-Date: 2021-12-19 01:32-0500\n"
+"PO-Revision-Date: 2021-12-19 01:32-0500\n"
 "Last-Translator: \n"
 "Language-Team: Maze-Photo\n"
 "Language: fr\n"
@@ -15,49 +15,60 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SearchPath-0: includes\n"
 "X-Poedit-SearchPath-1: .\n"
-"X-Poedit-SearchPath-2: includes/gallery.php\n"
-"X-Poedit-SearchPath-3: includes/vcg-functions.php\n"
+"X-Poedit-SearchPath-2: includes/vcg-functions.php\n"
 
-#: includes/gallery.php:4
-msgid "No media found"
-msgstr "Aucun média n'a été trouvé"
-
-#: includes/gallery.php:11
-msgid "Audiovisual clips"
-msgstr "Capsules audiovisuelles"
-
-#: includes/gallery.php:13
-msgid "Choose language"
-msgstr "Choisir la langue"
-
-#: includes/vcg-functions.php:19
+#: includes/vcg-functions.php:24
 msgid "Video clips gallery"
 msgstr "Capsules audiovisuelles"
 
-#: includes/vcg-functions.php:134
+#: includes/vcg-functions.php:139
 msgid "Display video clips gallery"
 msgstr "Afficher la galerie"
 
-#: includes/vcg-functions.php:135
+#: includes/vcg-functions.php:140
 msgid "no"
 msgstr "non"
 
-#: includes/vcg-functions.php:136
+#: includes/vcg-functions.php:141
 msgid "yes"
 msgstr "oui"
 
-#: includes/vcg-functions.php:140
+#: includes/vcg-functions.php:145
 msgid "Attach media"
 msgstr "Attacher un média"
 
-#: includes/vcg-functions.php:144
+#: includes/vcg-functions.php:149
 msgid "No attachment yet"
 msgstr "Aucun média attaché"
 
-#: includes/vcg-functions.php:148
+#: includes/vcg-functions.php:153
 msgid "Included medias"
 msgstr "Médias inclus"
 
-#: includes/vcg-functions.php:162
+#: includes/vcg-functions.php:167
 msgid "Title"
 msgstr "Titre"
+
+#: includes/vcg-functions.php:172
+msgid "Included medias must have at least one language to be displayed (e.g.: categories>vcg_languages>français)"
+msgstr "Les médias inclus doivent avoir au moins une langue afin d'être affichés (ex.: catégories>vcg_languages>français)"
+
+#: includes/vcg-functions.php:173
+msgid "Default category on page load: français"
+msgstr "Catégorie par défaut au chargement de la page: français"
+
+#: includes/vcg-functions.php:243 includes/vcg-functions.php:286
+msgid "No media found"
+msgstr "Aucun média n'a été trouvé"
+
+#: includes/vcg-functions.php:246
+msgid "Audiovisual clips"
+msgstr "Capsules audiovisuelles"
+
+#: includes/vcg-functions.php:248
+msgid "Choose language"
+msgstr "Choisir la langue"
+
+#: index.php:46
+msgid "This plugin needs Media Library Categories to work properly. Please install and activate it first! The plugin has been deactivated."
+msgstr "Cette extension dépend de Media Library Categories pour fonctionner correctement. Merci de commencer par l'installer et l'activer! L'extension a été désactivée."

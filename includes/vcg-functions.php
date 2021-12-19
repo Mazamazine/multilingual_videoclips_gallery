@@ -146,7 +146,7 @@ function vcg_custom_box_html( $post ) {
     <span id="messages" style="display: none; color: red"></span>
     <?php
     if(empty($attachedVids)) {
-        echo '<br/><br/><span id="noAttachTxt">'.__('No attachment yet', 'vcg').'</span>';
+        echo '<br/><br/><span id="noAttachTxt">'.__('No attachment yet', 'vcg').'</span><br/>';
         $tableDisplay = 'none';
         $tableContent = '';
     } else { 
@@ -168,6 +168,9 @@ function vcg_custom_box_html( $post ) {
       <?php echo $tableContent; ?>
     </table>
     <?php
+    echo '<br/><i>';
+    _e('Included medias must have at least one language to be displayed (e.g.: categories>vcg_languages>français)', 'vcg');
+    echo '</i><br/><i>'.__('Default category on page load: français', 'vcg').'</i>';
 }
 
 /*
