@@ -4,6 +4,8 @@
  */
 add_action( 'wp_enqueue_scripts', 'vcg_enqueue_scripts' );
 function vcg_enqueue_scripts() {
+    $enabled = get_post_meta( get_the_ID(), '_vcg_enable', true );
+    if(!$enabled) return;
     wp_register_style( 'custom-gallery', plugins_url( '/css/gallery.css' , __FILE__ ) );
     wp_enqueue_style( 'custom-gallery' );
     wp_register_script( 'ajaxHandle', plugins_url( '/js/update_gallery.js' , __FILE__ ), array('jquery'), false, true );
