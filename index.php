@@ -29,15 +29,10 @@ function vcg_plugin_init() {
   else $parentCat = $newTerm->error_data['term_exists'];
   global $vcg_language_catId;
   $vcg_language_catId = $parentCat;
-  // We need the 'français' cat which is the default
-  wp_insert_term(
-    'français',
-    'category',
-    array(
-        'slug'        => 'fr',
-        'parent'      => $vcg_language_catId,
-    )
-  );
+  // Create french subcategory if not present
+  // It's the default category
+  include_once( ABSPATH . 'wp-admin/includes/taxonomy.php' );
+  wp_create_category('français', $vcg_language_catId);
 }
 add_action('init', 'vcg_plugin_init');
 
