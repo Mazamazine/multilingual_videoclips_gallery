@@ -21,7 +21,7 @@ function vcg_plugin_init() {
     return;
   }
   // Load translations
-  load_plugin_textdomain( 'vcg', false, 'capsules_videos/languages' );
+  load_plugin_textdomain( 'vcg', false, 'multilingual-video-clips-gallery/languages' );
   // We need the 'vcg_languages' categorie for medias languages
   // Create it if not present
   $newTerm = wp_insert_term( 'vcg_languages', 'category' );
